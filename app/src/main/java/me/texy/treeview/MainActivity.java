@@ -27,14 +27,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void buildTree() {
-        for (int i = 0; i < 30; i++) {
-            TreeNode treeNode = new TreeNode(new String("Parent  " + "No." + i));
+        for (int i = 0; i < 20; i++) {
+            TreeNode treeNode = new TreeNode(new String("Parent  " + "No." + i*100));
             treeNode.setLevel(0);
             for (int j = 0; j < 5; j++) {
-                TreeNode treeNode1 = new TreeNode(new String("Child " + "No." + j));
+                TreeNode treeNode1 = new TreeNode(new String("Child " + "No." + i*100+10*j));
                 treeNode1.setLevel(1);
                 for (int k = 0; k < 5; k++) {
-                    TreeNode treeNode2 = new TreeNode(new String("Grand Child " + "No." + k));
+                    TreeNode treeNode2 = new TreeNode(new String("Grand Child " + "No." + i*100+j*10+k));
                     treeNode2.setLevel(2);
                     treeNode1.addChild(treeNode2);
                 }

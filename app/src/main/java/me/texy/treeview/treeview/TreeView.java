@@ -6,8 +6,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import java.util.List;
-
 /**
  * Created by xinyuanzhong on 2017/4/20.
  */
@@ -34,13 +32,19 @@ public class TreeView implements TreeAction {
 
     public View getView() {
         if (rootView == null) {
-            rootView = getChildrenView(root);
+            rootView = buildChildrenView(root);
         }
         return rootView;
     }
 
+    /**
+     * build a RecyclerView from @param treeNode's children
+     *
+     * @param treeNode target node
+     * @return
+     */
     @NonNull
-    private RecyclerView getChildrenView(TreeNode treeNode) {
+    private RecyclerView buildChildrenView(TreeNode treeNode) {
         RecyclerView recyclerView = new RecyclerView(context);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         BaseNodeAdapter adapter = new BaseNodeAdapter(context, treeNode.getChildren(), baseNodeViewFactory);
@@ -51,18 +55,59 @@ public class TreeView implements TreeAction {
 
     @Override
     public void expandAll() {
+        if (root == null) {
+            return;
+        }
+        for (TreeNode child : root.getChildren()) {
+            expandNode(child, true, false);
+        }
+        refreshTreeView();
+    }
 
+    private void expandNode(TreeNode treeNode, boolean expandChild, boolean immediately) {
+        if (treeNode == null) {
+            return;
+        }
+        treeNode.setExpanded(true);
+
+        if (expandChild) {
+            for (TreeNode child : treeNode.getChildren()) {
+                expandNode(child, expandChild, false);
+            }
+        }
+        if (immediately) {
+            refreshTreeView();
+        }
+    }
+
+    private void refreshTreeView() {
+        if (rootView != null) {
+            rootView.getAdapter().notifyDataSetChanged();
+        }
     }
 
     @Override
     public void expandNode(TreeNode treeNode) {
-        treeNode.setExpanded(true);
-        rootView.getAdapter().notifyDataSetChanged();
+        expandNode(treeNode, false, true);
     }
 
     @Override
     public void expandLevel(int level) {
+        expandLevel(root, level);
+        refreshTreeView();
+    }
 
+    private void expandLevel(TreeNode treeNode, int level) {
+        if (treeNode == null) {
+            return;
+        }
+        for (TreeNode child : treeNode.getChildren()) {
+            if (child.getLevel() == level) {
+                expandNode(child, false, false);
+            } else {
+                expandLevel(child, level);
+            }
+        }
     }
 
     @Override

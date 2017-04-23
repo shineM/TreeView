@@ -21,6 +21,7 @@ public class TreeNode {
     private boolean expanded;
 
     private boolean itemClickEnable = true;
+    private int index;
 
     public TreeNode(Object value) {
         this.value = value;
@@ -52,6 +53,9 @@ public class TreeNode {
     }
 
     public List<TreeNode> getChildren() {
+        if (children == null) {
+            return new ArrayList<>();
+        }
         return children;
     }
 
@@ -89,11 +93,28 @@ public class TreeNode {
     }
 
     public void addChild(TreeNode treeNode) {
+        if (treeNode == null) {
+            return;
+        }
         children.add(treeNode);
+        treeNode.setIndex(getChildren().size());
+        treeNode.setParent(this);
     }
 
     public static TreeNode root() {
         TreeNode treeNode = new TreeNode(null);
         return treeNode;
+    }
+
+    public String getId() {
+        return getLevel() + "," + getIndex();
+    }
+
+    private int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 }

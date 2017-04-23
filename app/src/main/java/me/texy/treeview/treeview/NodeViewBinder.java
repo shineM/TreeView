@@ -2,12 +2,13 @@ package me.texy.treeview.treeview;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewGroup;
 
 /**
  * Created by zxy on 17/4/23.
  */
 
-public abstract class NodeViewBinder extends RecyclerView.ViewHolder{
+public abstract class NodeViewBinder extends RecyclerView.ViewHolder {
     private TreeNode treeNode;
 
     public NodeViewBinder(View itemView) {

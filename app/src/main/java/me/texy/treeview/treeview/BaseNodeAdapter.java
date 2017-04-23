@@ -1,12 +1,19 @@
 package me.texy.treeview.treeview;
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
 import android.widget.LinearLayout;
 
 import java.util.List;
@@ -50,20 +57,24 @@ public class BaseNodeAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         final TreeNode treeNode = treeNodeList.get(position);
         final ViewGroup nodeContainer = (ViewGroup) holder.itemView;
         final NodeViewBinder viewBinder = treeNodeList.get(0).getViewBinder();
 
+        if (treeNode.getParent() != null && treeNode.getParent().getParent() != null) {
+//            holder.setIsRecyclable(false);
+        }
+
         treeNode.setViewBinder((NodeViewBinder) holder);
 
         if (treeNode.isItemClickEnable()) {
-            View view = nodeContainer.getChildAt(0);
+            final View view = nodeContainer.getChildAt(0);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     treeNode.setExpanded(!treeNode.isExpanded());
-                    notifyDataSetChanged();
+                    notifyItemChanged(position);
                 }
             });
         }
@@ -77,7 +88,8 @@ public class BaseNodeAdapter extends RecyclerView.Adapter {
                 }
             } else {
                 if (isAlreadyExpanded) {
-                    nodeContainer.removeViewAt(1);
+                    final View view = nodeContainer.getChildAt(1);
+                    nodeContainer.removeView(view);
                 }
             }
         }
@@ -88,6 +100,9 @@ public class BaseNodeAdapter extends RecyclerView.Adapter {
     @NonNull
     private RecyclerView buildChildrenView(TreeNode treeNode) {
         RecyclerView childrenView = new RecyclerView(context);
+        childrenView.setNestedScrollingEnabled(false);
+        childrenView.setFocusable(false);
+        childrenView.getItemAnimator().setChangeDuration(0);
         childrenView.setLayoutManager(new LinearLayoutManager(context));
         BaseNodeAdapter adapter = new BaseNodeAdapter(context, treeNode.getChildren(), baseNodeViewFactory);
         childrenView.setAdapter(adapter);
@@ -99,11 +114,4 @@ public class BaseNodeAdapter extends RecyclerView.Adapter {
         return treeNodeList == null ? 0 : treeNodeList.size();
     }
 
-    public static class BaseViewHolder extends RecyclerView.ViewHolder {
-
-        public BaseViewHolder(View itemView) {
-            super(itemView);
-        }
-
-    }
 }
