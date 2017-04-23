@@ -69,16 +69,18 @@ public class BaseNodeAdapter extends RecyclerView.Adapter {
         }
 
         if (treeNode.hasChild()) {
-            if (treeNode.isExpanded() && nodeContainer.getChildCount() < 2) {
-                Log.d("onBindViewHolder", "展开树形结构" + treeNode.getValue().toString());
-                RecyclerView childrenView = new RecyclerView(context);
-                childrenView.setLayoutManager(new LinearLayoutManager(context));
-                BaseNodeAdapter adapter = new BaseNodeAdapter(context, treeNode.getChildren(), baseNodeViewFactory);
-                childrenView.setAdapter(adapter);
-                nodeContainer.addView(childrenView);
+            boolean isAlreadyExpanded = nodeContainer.getChildCount() > 1;
+            if (treeNode.isExpanded()) {
+                if (!isAlreadyExpanded) {
+                    Log.d("onBindViewHolder", "展开树形结构" + treeNode.getValue().toString());
+                    RecyclerView childrenView = new RecyclerView(context);
+                    childrenView.setLayoutManager(new LinearLayoutManager(context));
+                    BaseNodeAdapter adapter = new BaseNodeAdapter(context, treeNode.getChildren(), baseNodeViewFactory);
+                    childrenView.setAdapter(adapter);
+                    nodeContainer.addView(childrenView);
+                }
             } else {
-                Log.d("onBindViewHolder", "收起树形结构" + treeNode.getValue().toString());
-                if (nodeContainer.getChildCount() > 1) {
+                if (isAlreadyExpanded) {
                     nodeContainer.removeViewAt(1);
                 }
             }
