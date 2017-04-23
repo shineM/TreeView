@@ -1,9 +1,9 @@
 package me.texy.treeview.treeview;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,38 +19,41 @@ public class BaseNodeAdapter extends RecyclerView.Adapter {
     private Context context;
     private List<TreeNode> treeNodeList;
     private BaseNodeViewFactory baseNodeViewFactory;
-    private View EMPTY_PARAMETOR;
+    private View EMPTY_PARAMETER;
 
-    public BaseNodeAdapter(Context context, List<TreeNode> treeNodeList, BaseNodeViewFactory baseNodeViewFactory) {
+    public BaseNodeAdapter(Context context, List<TreeNode> treeNodeList,
+                           @NonNull BaseNodeViewFactory baseNodeViewFactory) {
         this.context = context;
         this.treeNodeList = treeNodeList;
         this.baseNodeViewFactory = baseNodeViewFactory;
-        this.EMPTY_PARAMETOR = new View(context);
+        this.EMPTY_PARAMETER = new View(context);
         initNodesBinder();
     }
 
     private void initNodesBinder() {
         for (TreeNode node : treeNodeList) {
-            node.setViewBinder(baseNodeViewFactory.getNodeViewBinder(EMPTY_PARAMETOR, node.getLevel()));
+            node.setViewBinder(baseNodeViewFactory.getNodeViewBinder(EMPTY_PARAMETER, node.getLevel()));
         }
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        TreeNode sampleNode = treeNodeList.get(0);
         View view = LayoutInflater.from(context).inflate(
-                treeNodeList.get(0).getViewBinder().getLayoutId(treeNodeList.get(0).getLevel()), parent, false);
+                sampleNode.getViewBinder().getLayoutId(sampleNode.getLevel()), parent, false);
 
         LinearLayout container = new LinearLayout(context);
         container.setOrientation(LinearLayout.VERTICAL);
         container.addView(view);
 
-        return baseNodeViewFactory.getNodeViewBinder(container, treeNodeList.get(0).getLevel());
+        return baseNodeViewFactory.getNodeViewBinder(container, sampleNode.getLevel());
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         final TreeNode treeNode = treeNodeList.get(position);
         final ViewGroup nodeContainer = (ViewGroup) holder.itemView;
+        final NodeViewBinder viewBinder = treeNodeList.get(0).getViewBinder();
 
         treeNode.setViewBinder((NodeViewBinder) holder);
 
@@ -59,9 +62,6 @@ public class BaseNodeAdapter extends RecyclerView.Adapter {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d("onBindViewHolder", "点击了树形结构" + treeNode.getValue().toString());
-                    Log.d("onBindViewHolder", "点击position" + position);
-
                     treeNode.setExpanded(!treeNode.isExpanded());
                     notifyDataSetChanged();
                 }
@@ -72,11 +72,7 @@ public class BaseNodeAdapter extends RecyclerView.Adapter {
             boolean isAlreadyExpanded = nodeContainer.getChildCount() > 1;
             if (treeNode.isExpanded()) {
                 if (!isAlreadyExpanded) {
-                    Log.d("onBindViewHolder", "展开树形结构" + treeNode.getValue().toString());
-                    RecyclerView childrenView = new RecyclerView(context);
-                    childrenView.setLayoutManager(new LinearLayoutManager(context));
-                    BaseNodeAdapter adapter = new BaseNodeAdapter(context, treeNode.getChildren(), baseNodeViewFactory);
-                    childrenView.setAdapter(adapter);
+                    RecyclerView childrenView = buildChildrenView(treeNode);
                     nodeContainer.addView(childrenView);
                 }
             } else {
@@ -86,13 +82,21 @@ public class BaseNodeAdapter extends RecyclerView.Adapter {
             }
         }
 
-        treeNodeList.get(0).getViewBinder().bindView(
-                holder.itemView, treeNode);
+        viewBinder.bindView(holder.itemView, treeNode);
+    }
+
+    @NonNull
+    private RecyclerView buildChildrenView(TreeNode treeNode) {
+        RecyclerView childrenView = new RecyclerView(context);
+        childrenView.setLayoutManager(new LinearLayoutManager(context));
+        BaseNodeAdapter adapter = new BaseNodeAdapter(context, treeNode.getChildren(), baseNodeViewFactory);
+        childrenView.setAdapter(adapter);
+        return childrenView;
     }
 
     @Override
     public int getItemCount() {
-        return treeNodeList.size();
+        return treeNodeList == null ? 0 : treeNodeList.size();
     }
 
     public static class BaseViewHolder extends RecyclerView.ViewHolder {

@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/holo_green_light"
+    android:background="@android:color/holo_blue_light"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="50dp"
+            android:layout_marginLeft="100dp"
             android:paddingTop="10dp"
             android:text="Tree Node" />
     </RelativeLayout>

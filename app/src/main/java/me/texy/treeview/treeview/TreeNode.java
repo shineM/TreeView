@@ -17,7 +17,9 @@ public class TreeNode {
     private List<TreeNode> children;
 
     private NodeViewBinder viewBinder;
+
     private boolean expanded;
+
     private boolean itemClickEnable = true;
 
     public TreeNode(Object value) {
@@ -66,15 +68,6 @@ public class TreeNode {
         this.viewBinder.setTreeNode(this);
     }
 
-    public void addChild(TreeNode treeNode) {
-        children.add(treeNode);
-    }
-
-    public static TreeNode root() {
-        TreeNode treeNode = new TreeNode(null);
-        return treeNode;
-    }
-
     public void setExpanded(boolean expanded) {
         this.expanded = expanded;
     }
@@ -93,5 +86,14 @@ public class TreeNode {
 
     public void setItemClickEnable(boolean itemClickEnable) {
         this.itemClickEnable = itemClickEnable;
+    }
+
+    public void addChild(TreeNode treeNode) {
+        children.add(treeNode);
+    }
+
+    public static TreeNode root() {
+        TreeNode treeNode = new TreeNode(null);
+        return treeNode;
     }
 }

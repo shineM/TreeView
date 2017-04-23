@@ -1,15 +1,10 @@
 package me.texy.treeview;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
+import android.support.v7.app.AppCompatActivity;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
-import me.texy.treeview.treeview.BaseNodeViewFactory;
-import me.texy.treeview.treeview.NodeViewBinder;
 import me.texy.treeview.treeview.TreeNode;
 import me.texy.treeview.treeview.TreeView;
 
@@ -25,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
         root = TreeNode.root();
         buildTree();
         viewGroup = (RelativeLayout) findViewById(R.id.container);
+
         TreeView treeView = new TreeView(root, this);
         treeView.setBaseNodeViewFactory(new MyNodeViewFactory());
         viewGroup.addView(treeView.getView());
@@ -37,6 +33,11 @@ public class MainActivity extends AppCompatActivity {
             for (int j = 0; j < 5; j++) {
                 TreeNode treeNode1 = new TreeNode(new String("Child " + "No." + j));
                 treeNode1.setLevel(1);
+                for (int k = 0; k < 5; k++) {
+                    TreeNode treeNode2 = new TreeNode(new String("Grand Child " + "No." + k));
+                    treeNode2.setLevel(2);
+                    treeNode1.addChild(treeNode2);
+                }
                 treeNode.addChild(treeNode1);
             }
             root.addChild(treeNode);
