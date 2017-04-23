@@ -1,4 +1,4 @@
-package me.texy.treeview;
+package me.texy.treeview.treeview;
 
 /**
  * Created by xinyuanzhong on 2017/4/20.
