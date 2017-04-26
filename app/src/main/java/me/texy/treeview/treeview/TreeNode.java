@@ -16,8 +16,6 @@ public class TreeNode {
 
     private List<TreeNode> children;
 
-    private NodeViewBinder viewBinder;
-
     private boolean expanded;
 
     private boolean itemClickEnable = true;
@@ -61,15 +59,6 @@ public class TreeNode {
 
     public void setChildren(List<TreeNode> children) {
         this.children = children;
-    }
-
-    public NodeViewBinder getViewBinder() {
-        return viewBinder;
-    }
-
-    public void setViewBinder(NodeViewBinder viewBinder) {
-        this.viewBinder = viewBinder;
-        this.viewBinder.setTreeNode(this);
     }
 
     public void setExpanded(boolean expanded) {

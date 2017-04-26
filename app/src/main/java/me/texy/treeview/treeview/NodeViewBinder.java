@@ -9,18 +9,9 @@ import android.view.ViewGroup;
  */
 
 public abstract class NodeViewBinder extends RecyclerView.ViewHolder {
-    private TreeNode treeNode;
 
     public NodeViewBinder(View itemView) {
         super(itemView);
-    }
-
-    public TreeNode getTreeNode() {
-        return treeNode;
-    }
-
-    public void setTreeNode(TreeNode treeNode) {
-        this.treeNode = treeNode;
     }
 
     protected abstract int getLayoutId(int level);

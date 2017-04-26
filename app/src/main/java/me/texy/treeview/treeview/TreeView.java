@@ -38,7 +38,7 @@ public class TreeView implements TreeAction {
     }
 
     /**
-     * build a RecyclerView from @param treeNode's children
+     * build a RecyclerView from <code>treeNode</code>'s children
      *
      * @param treeNode target node
      * @return
@@ -46,12 +46,15 @@ public class TreeView implements TreeAction {
     @NonNull
     private RecyclerView buildChildrenView(TreeNode treeNode) {
         RecyclerView recyclerView = new RecyclerView(context);
+        /**
+         * disable multi touch event to prevent terrible data set error when calculate list.
+         */
+        recyclerView.setMotionEventSplittingEnabled(false);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        BaseNodeAdapter adapter = new BaseNodeAdapter(context, treeNode.getChildren(), baseNodeViewFactory);
+        NodeViewAdapter adapter = new NodeViewAdapter(context, treeNode.getChildren(), baseNodeViewFactory);
         recyclerView.setAdapter(adapter);
         return recyclerView;
     }
-
 
     @Override
     public void expandAll() {
@@ -82,7 +85,7 @@ public class TreeView implements TreeAction {
 
     private void refreshTreeView() {
         if (rootView != null) {
-            rootView.getAdapter().notifyDataSetChanged();
+            ((NodeViewAdapter) rootView.getAdapter()).refreshView();
         }
     }
 

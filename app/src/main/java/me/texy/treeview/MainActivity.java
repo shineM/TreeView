@@ -24,16 +24,17 @@ public class MainActivity extends AppCompatActivity {
         TreeView treeView = new TreeView(root, this);
         treeView.setBaseNodeViewFactory(new MyNodeViewFactory());
         viewGroup.addView(treeView.getView());
+//        treeView.expandAll();
     }
 
     private void buildTree() {
         for (int i = 0; i < 20; i++) {
             TreeNode treeNode = new TreeNode(new String("Parent  " + "No." + i*100));
             treeNode.setLevel(0);
-            for (int j = 0; j < 5; j++) {
+            for (int j = 0; j < 20; j++) {
                 TreeNode treeNode1 = new TreeNode(new String("Child " + "No." + i*100+10*j));
                 treeNode1.setLevel(1);
-                for (int k = 0; k < 5; k++) {
+                for (int k = 0; k < 20; k++) {
                     TreeNode treeNode2 = new TreeNode(new String("Grand Child " + "No." + i*100+j*10+k));
                     treeNode2.setLevel(2);
                     treeNode1.addChild(treeNode2);
