@@ -6,11 +6,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import me.texy.treeview.treeview.base.BaseNodeViewFactory;
+import me.texy.treeview.treeview.base.CheckableNodeViewBinder;
 import me.texy.treeview.treeview.base.NodeViewBinder;
 import me.texy.treeview.treeview.helper.TreeHelper;
 
@@ -92,8 +94,8 @@ public class TreeViewAdapter extends RecyclerView.Adapter {
         final TreeNode treeNode = expandedNodeList.get(position);
         final NodeViewBinder viewBinder = getNodeBinder(treeNode);
 
-        if (viewBinder.getTriggerToggleViewId() != 0) {
-            View triggerToggleView = nodeView.findViewById(viewBinder.getTriggerToggleViewId());
+        if (viewBinder.getToggleTriggerViewId() != 0) {
+            View triggerToggleView = nodeView.findViewById(viewBinder.getToggleTriggerViewId());
 
             if (triggerToggleView != null) {
                 triggerToggleView.setOnClickListener(new View.OnClickListener() {
@@ -112,7 +114,47 @@ public class TreeViewAdapter extends RecyclerView.Adapter {
             });
         }
 
+        if (viewBinder instanceof CheckableNodeViewBinder) {
+            final CheckBox checkableView = (CheckBox) nodeView
+                    .findViewById(((CheckableNodeViewBinder) viewBinder).getCheckableViewId());
+
+            if (checkableView != null) {
+                checkableView.setChecked(treeNode.isSelected());
+
+                checkableView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        treeNode.setSelected(checkableView.isChecked());
+
+                        selectChildren(treeNode, checkableView.isChecked());
+                        selectParentIfNeed(treeNode, checkableView.isChecked());
+                    }
+                });
+            } else {
+                throw new ClassCastException("The getCheckableViewId() " +
+                        "must return a CheckBox's id");
+            }
+        }
+
         viewBinder.bindView(nodeView, treeNode);
+    }
+
+    private void selectChildren(TreeNode treeNode, boolean checked) {
+        List<TreeNode> impactedChildren = TreeHelper.selectNodeAndChild(treeNode, checked);
+        int index = expandedNodeList.indexOf(treeNode);
+        if (index != -1 && impactedChildren.size() > 0) {
+            notifyItemRangeChanged(index + 1, impactedChildren.size());
+        }
+    }
+
+    private void selectParentIfNeed(TreeNode treeNode, boolean checked) {
+        List<TreeNode> impactedParents = TreeHelper.selectParentIfNeedWhenNodeSelected(treeNode, checked);
+        if (impactedParents.size() > 0) {
+            for (TreeNode parent : impactedParents) {
+                int position = expandedNodeList.indexOf(parent);
+                if (position != -1) notifyItemChanged(position);
+            }
+        }
     }
 
     private void onNodeToggled(TreeNode treeNode) {

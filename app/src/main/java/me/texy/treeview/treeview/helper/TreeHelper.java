@@ -161,4 +161,76 @@ public class TreeHelper {
             }
         }
     }
+
+    public static List<TreeNode> selectNodeAndChild(TreeNode treeNode, boolean select) {
+        List<TreeNode> expandChildren = new ArrayList<>();
+
+        if (treeNode == null) {
+            return expandChildren;
+        }
+        treeNode.setSelected(select);
+
+        if (!treeNode.hasChild()) {
+            return expandChildren;
+        }
+
+        if (treeNode.isExpanded()) {
+            for (TreeNode child : treeNode.getChildren()) {
+                expandChildren.add(child);
+
+                if (child.isExpanded()) {
+                    expandChildren.addAll(selectNodeAndChild(child, select));
+                } else {
+                    selectNodeInner(treeNode, select);
+                }
+            }
+        } else {
+            selectNodeInner(treeNode, select);
+        }
+        return expandChildren;
+    }
+
+    private static void selectNodeInner(TreeNode treeNode, boolean select) {
+        if (treeNode == null) {
+            return;
+        }
+        treeNode.setSelected(select);
+        if (treeNode.hasChild()) {
+            for (TreeNode child : treeNode.getChildren()) {
+                selectNodeInner(child, select);
+            }
+        }
+    }
+
+    public static List<TreeNode> selectParentIfNeedWhenNodeSelected(TreeNode treeNode, boolean select) {
+        List<TreeNode> impactedParents = new ArrayList<>();
+        if (treeNode == null) {
+            return impactedParents;
+        }
+
+        //ensure that the node's level is bigger than 1(first level is 1)
+        TreeNode parent = treeNode.getParent();
+        if (parent == null || parent.getParent() == null) {
+            return impactedParents;
+        }
+
+        List<TreeNode> brothers = parent.getChildren();
+        int selectedBrotherCount = 0;
+        for (TreeNode brother : brothers) {
+            if (brother.isSelected()) selectedBrotherCount++;
+        }
+
+        if (select && selectedBrotherCount == brothers.size()) {
+            parent.setSelected(true);
+            impactedParents.add(parent);
+            impactedParents.addAll(selectParentIfNeedWhenNodeSelected(parent, true));
+        } else if (!select && selectedBrotherCount == brothers.size() - 1) {
+            // only the condition that the size of selected's brothers
+            // is one less than total count can trigger the disSelect
+            parent.setSelected(false);
+            impactedParents.add(parent);
+            impactedParents.addAll(selectParentIfNeedWhenNodeSelected(parent, false));
+        }
+        return impactedParents;
+    }
 }

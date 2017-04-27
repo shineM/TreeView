@@ -20,7 +20,7 @@ public abstract class NodeViewBinder extends RecyclerView.ViewHolder {
 
     public abstract void bindView(View view, TreeNode treeNode);
 
-    public int getTriggerToggleViewId() {
+    public int getToggleTriggerViewId() {
         return 0;
     }
 }

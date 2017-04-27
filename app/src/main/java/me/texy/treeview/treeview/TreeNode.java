@@ -20,8 +20,6 @@ public class TreeNode {
 
     private boolean expanded;
 
-    private boolean selectable;
-
     private boolean selected;
 
     private boolean itemClickEnable = true;
@@ -128,13 +126,5 @@ public class TreeNode {
 
     public void setSelected(boolean selected) {
         this.selected = selected;
-    }
-
-    public boolean isSelectable() {
-        return selectable;
-    }
-
-    public void setSelectable(boolean selectable) {
-        this.selectable = selectable;
     }
 }
