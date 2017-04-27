@@ -2,8 +2,8 @@ package me.texy.treeview;
 
 import android.view.View;
 
-import me.texy.treeview.treeview.BaseNodeViewFactory;
-import me.texy.treeview.treeview.NodeViewBinder;
+import me.texy.treeview.treeview.base.BaseNodeViewFactory;
+import me.texy.treeview.treeview.base.NodeViewBinder;
 
 /**
  * Created by zxy on 17/4/23.

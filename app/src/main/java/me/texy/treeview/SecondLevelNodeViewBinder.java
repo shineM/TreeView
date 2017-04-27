@@ -3,17 +3,22 @@ package me.texy.treeview;
 import android.view.View;
 import android.widget.TextView;
 
-import me.texy.treeview.treeview.NodeViewBinder;
+import me.texy.treeview.treeview.base.CheckableNodeViewBinder;
 import me.texy.treeview.treeview.TreeNode;
 
 /**
  * Created by zxy on 17/4/23.
  */
 
-public class SecondLevelNodeViewBinder extends NodeViewBinder {
+public class SecondLevelNodeViewBinder extends CheckableNodeViewBinder {
 
     public SecondLevelNodeViewBinder(View itemView) {
         super(itemView);
+    }
+
+    @Override
+    public int getCheckableViewId() {
+        return R.id.checkBox;
     }
 
     @Override
@@ -22,7 +27,7 @@ public class SecondLevelNodeViewBinder extends NodeViewBinder {
     }
 
     @Override
-    protected void bindView(View view, TreeNode treeNode) {
+    public void bindView(View view, TreeNode treeNode) {
         TextView textView = (TextView) view.findViewById(R.id.node_name_view);
         textView.setText(treeNode.getValue().toString());
     }
