@@ -16,14 +16,43 @@ public class TreeNode {
 
     private List<TreeNode> children;
 
+    private int index;
+
     private boolean expanded;
 
+    private boolean selectable;
+
+    private boolean selected;
+
     private boolean itemClickEnable = true;
-    private int index;
 
     public TreeNode(Object value) {
         this.value = value;
         this.children = new ArrayList<>();
+    }
+
+    public static TreeNode root() {
+        TreeNode treeNode = new TreeNode(null);
+        return treeNode;
+    }
+
+    public void addChild(TreeNode treeNode) {
+        if (treeNode == null) {
+            return;
+        }
+        children.add(treeNode);
+        treeNode.setIndex(getChildren().size());
+        treeNode.setParent(this);
+    }
+
+
+    public void removeChild(TreeNode treeNode) {
+        if (treeNode == null || treeNode.getChildren().size() < 1) {
+            return;
+        }
+        if (getChildren().indexOf(treeNode) != -1) {
+            getChildren().remove(treeNode);
+        }
     }
 
     public int getLevel() {
@@ -81,20 +110,6 @@ public class TreeNode {
         this.itemClickEnable = itemClickEnable;
     }
 
-    public void addChild(TreeNode treeNode) {
-        if (treeNode == null) {
-            return;
-        }
-        children.add(treeNode);
-        treeNode.setIndex(getChildren().size());
-        treeNode.setParent(this);
-    }
-
-    public static TreeNode root() {
-        TreeNode treeNode = new TreeNode(null);
-        return treeNode;
-    }
-
     public String getId() {
         return getLevel() + "," + getIndex();
     }
@@ -105,5 +120,21 @@ public class TreeNode {
 
     public void setIndex(int index) {
         this.index = index;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+
+    public boolean isSelectable() {
+        return selectable;
+    }
+
+    public void setSelectable(boolean selectable) {
+        this.selectable = selectable;
     }
 }

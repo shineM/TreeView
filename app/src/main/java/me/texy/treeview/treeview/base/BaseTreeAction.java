@@ -1,10 +1,14 @@
-package me.texy.treeview.treeview;
+package me.texy.treeview.treeview.base;
+
+import java.util.List;
+
+import me.texy.treeview.treeview.TreeNode;
 
 /**
  * Created by xinyuanzhong on 2017/4/20.
  */
 
-public interface TreeAction {
+public interface BaseTreeAction {
     void expandAll();
 
     void expandNode(TreeNode treeNode);
@@ -22,4 +26,7 @@ public interface TreeAction {
     void deleteNode(TreeNode node);
 
     void addNode(TreeNode parent, TreeNode treeNode);
+
+    List<TreeNode> getAllNodes();
+
 }
