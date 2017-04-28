@@ -116,7 +116,7 @@ public class TreeHelper {
     }
 
     /**
-     * Collapse node recursive without other calculation
+     * Collapse all children node recursive
      *
      * @param node target node to collapse
      */

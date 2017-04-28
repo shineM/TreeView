@@ -4,14 +4,15 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SimpleItemAnimator;
 import android.view.View;
 
 import java.util.List;
 
+import me.texy.treeview.treeview.animator.StaticAnimator;
 import me.texy.treeview.treeview.base.BaseNodeViewFactory;
 import me.texy.treeview.treeview.base.SelectableTreeAction;
 import me.texy.treeview.treeview.helper.TreeHelper;
-import me.texy.treeview.treeview.listener.OnNodeToggleListener;
 
 /**
  * Created by xinyuanzhong on 2017/4/20.
@@ -28,7 +29,14 @@ public class TreeView implements SelectableTreeAction {
 
     private TreeViewAdapter adapter;
 
-    private OnNodeToggleListener onNodeToggleListener;
+    public void setItemAnimator(RecyclerView.ItemAnimator itemAnimator) {
+        this.itemAnimator = itemAnimator;
+        if (rootView != null && itemAnimator != null) {
+            rootView.setItemAnimator(itemAnimator);
+        }
+    }
+
+    private RecyclerView.ItemAnimator itemAnimator;
 
     public TreeView(@NonNull TreeNode root, @NonNull Context context) {
         this.root = root;
@@ -62,6 +70,11 @@ public class TreeView implements SelectableTreeAction {
          * disable multi touch event to prevent terrible data set error when calculate list.
          */
         recyclerView.setMotionEventSplittingEnabled(false);
+
+        recyclerView.setItemAnimator(itemAnimator != null ? itemAnimator : new StaticAnimator());
+        SimpleItemAnimator itemAnimator = (SimpleItemAnimator) recyclerView.getItemAnimator();
+        itemAnimator.setSupportsChangeAnimations(false);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         adapter = new TreeViewAdapter(context, root, baseNodeViewFactory);
         recyclerView.setAdapter(adapter);

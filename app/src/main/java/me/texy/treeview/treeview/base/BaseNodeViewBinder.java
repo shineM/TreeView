@@ -10,9 +10,9 @@ import me.texy.treeview.treeview.TreeNode;
  * Created by zxy on 17/4/23.
  */
 
-public abstract class NodeViewBinder extends RecyclerView.ViewHolder {
+public abstract class BaseNodeViewBinder extends RecyclerView.ViewHolder {
 
-    public NodeViewBinder(View itemView) {
+    public BaseNodeViewBinder(View itemView) {
         super(itemView);
     }
 
@@ -22,5 +22,9 @@ public abstract class NodeViewBinder extends RecyclerView.ViewHolder {
 
     public int getToggleTriggerViewId() {
         return 0;
+    }
+
+    public void onNodeToggled(View item, TreeNode treeNode, boolean expand) {
+        //empty
     }
 }

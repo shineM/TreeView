@@ -3,7 +3,7 @@ package me.texy.treeview;
 import android.view.View;
 
 import me.texy.treeview.treeview.base.BaseNodeViewFactory;
-import me.texy.treeview.treeview.base.NodeViewBinder;
+import me.texy.treeview.treeview.base.BaseNodeViewBinder;
 
 /**
  * Created by zxy on 17/4/23.
@@ -12,7 +12,7 @@ import me.texy.treeview.treeview.base.NodeViewBinder;
 public class MyNodeViewFactory extends BaseNodeViewFactory {
 
     @Override
-    public NodeViewBinder getNodeViewBinder(View view, int level) {
+    public BaseNodeViewBinder getNodeViewBinder(View view, int level) {
         switch (level) {
             case 0:
                 return new FirstLevelNodeViewBinder(view);

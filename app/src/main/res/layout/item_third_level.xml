@@ -2,23 +2,27 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="40dp"
-    android:background="@android:color/holo_blue_light"
+    android:background="@android:color/holo_orange_dark"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/node_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="100dp">
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="110dp"
+        android:orientation="horizontal">
+
 
         <TextView
             android:id="@+id/node_name_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:paddingTop="20dp"
-            android:text="Tree Node" />
-    </RelativeLayout>
+            android:fontFamily="monospace"
+            android:text="Tree Node"
+            android:textSize="15dp" />
+    </LinearLayout>
 
     <android.support.v7.widget.AppCompatCheckBox
         android:id="@+id/checkBox"
@@ -30,7 +34,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.5dp"
         android:layout_alignParentBottom="true"
         android:background="#ffffff"></View>
 </RelativeLayout>

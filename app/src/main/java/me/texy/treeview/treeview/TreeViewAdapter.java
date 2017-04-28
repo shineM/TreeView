@@ -13,7 +13,7 @@ import java.util.List;
 
 import me.texy.treeview.treeview.base.BaseNodeViewFactory;
 import me.texy.treeview.treeview.base.CheckableNodeViewBinder;
-import me.texy.treeview.treeview.base.NodeViewBinder;
+import me.texy.treeview.treeview.base.BaseNodeViewBinder;
 import me.texy.treeview.treeview.helper.TreeHelper;
 
 /**
@@ -92,7 +92,7 @@ public class TreeViewAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         final View nodeView = holder.itemView;
         final TreeNode treeNode = expandedNodeList.get(position);
-        final NodeViewBinder viewBinder = getNodeBinder(treeNode);
+        final BaseNodeViewBinder viewBinder = getNodeBinder(treeNode);
 
         if (viewBinder.getToggleTriggerViewId() != 0) {
             View triggerToggleView = nodeView.findViewById(viewBinder.getToggleTriggerViewId());
@@ -102,6 +102,7 @@ public class TreeViewAdapter extends RecyclerView.Adapter {
                     @Override
                     public void onClick(View v) {
                         onNodeToggled(treeNode);
+                        viewBinder.onNodeToggled(nodeView, treeNode, treeNode.isExpanded());
                     }
                 });
             }
@@ -110,15 +111,17 @@ public class TreeViewAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View v) {
                     onNodeToggled(treeNode);
+                    viewBinder.onNodeToggled(nodeView, treeNode, treeNode.isExpanded());
                 }
             });
         }
 
         if (viewBinder instanceof CheckableNodeViewBinder) {
-            final CheckBox checkableView = (CheckBox) nodeView
+            final View view = nodeView
                     .findViewById(((CheckableNodeViewBinder) viewBinder).getCheckableViewId());
 
-            if (checkableView != null) {
+            if (view != null && view instanceof CheckBox) {
+                final CheckBox checkableView = (CheckBox) view;
                 checkableView.setChecked(treeNode.isSelected());
 
                 checkableView.setOnClickListener(new View.OnClickListener() {
@@ -167,7 +170,7 @@ public class TreeViewAdapter extends RecyclerView.Adapter {
         }
     }
 
-    private NodeViewBinder getNodeBinder(TreeNode treeNode) {
+    private BaseNodeViewBinder getNodeBinder(TreeNode treeNode) {
         return baseNodeViewFactory.getNodeViewBinder(EMPTY_PARAMETER, treeNode.getLevel());
     }
 

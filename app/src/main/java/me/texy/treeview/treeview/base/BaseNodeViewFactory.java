@@ -8,6 +8,6 @@ import android.view.View;
 
 public abstract class BaseNodeViewFactory {
 
-    public abstract NodeViewBinder getNodeViewBinder(View view, int level);
+    public abstract BaseNodeViewBinder getNodeViewBinder(View view, int level);
 
 }
