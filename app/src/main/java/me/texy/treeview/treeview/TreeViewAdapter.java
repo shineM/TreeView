@@ -127,10 +127,8 @@ public class TreeViewAdapter extends RecyclerView.Adapter {
                 checkableView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        treeNode.setSelected(checkableView.isChecked());
-
-                        selectChildren(treeNode, checkableView.isChecked());
-                        selectParentIfNeed(treeNode, checkableView.isChecked());
+                        boolean checked = checkableView.isChecked();
+                        selectNode(checked, treeNode);
                     }
                 });
             } else {
@@ -142,11 +140,18 @@ public class TreeViewAdapter extends RecyclerView.Adapter {
         viewBinder.bindView(nodeView, treeNode);
     }
 
+    public void selectNode(boolean checked, TreeNode treeNode) {
+        treeNode.setSelected(checked);
+
+        selectChildren(treeNode, checked);
+        selectParentIfNeed(treeNode, checked);
+    }
+
     private void selectChildren(TreeNode treeNode, boolean checked) {
         List<TreeNode> impactedChildren = TreeHelper.selectNodeAndChild(treeNode, checked);
         int index = expandedNodeList.indexOf(treeNode);
         if (index != -1 && impactedChildren.size() > 0) {
-            notifyItemRangeChanged(index + 1, impactedChildren.size());
+            notifyItemRangeChanged(index, impactedChildren.size() + 1);
         }
     }
 
@@ -182,10 +187,6 @@ public class TreeViewAdapter extends RecyclerView.Adapter {
     public void refreshView() {
         buildExpandedNodeList();
         notifyDataSetChanged();
-    }
-
-    public List<TreeNode> getExpandNodes() {
-        return expandedNodeList;
     }
 
     /**

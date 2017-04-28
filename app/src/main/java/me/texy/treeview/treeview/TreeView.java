@@ -9,7 +9,7 @@ import android.view.View;
 
 import java.util.List;
 
-import me.texy.treeview.treeview.animator.StaticAnimator;
+import me.texy.treeview.treeview.animator.TreeItemAnimator;
 import me.texy.treeview.treeview.base.BaseNodeViewFactory;
 import me.texy.treeview.treeview.base.SelectableTreeAction;
 import me.texy.treeview.treeview.helper.TreeHelper;
@@ -38,31 +38,23 @@ public class TreeView implements SelectableTreeAction {
 
     private RecyclerView.ItemAnimator itemAnimator;
 
-    public TreeView(@NonNull TreeNode root, @NonNull Context context) {
+    public TreeView(@NonNull TreeNode root, @NonNull Context context,@NonNull BaseNodeViewFactory baseNodeViewFactory) {
         this.root = root;
         this.context = context;
-    }
-
-    public BaseNodeViewFactory getBaseNodeViewFactory() {
-        return baseNodeViewFactory;
-    }
-
-    public void setBaseNodeViewFactory(BaseNodeViewFactory baseNodeViewFactory) {
         this.baseNodeViewFactory = baseNodeViewFactory;
+        if (baseNodeViewFactory == null) {
+            throw new IllegalArgumentException("You must assign a BaseNodeViewFactory!");
+        }
     }
 
     public View getView() {
         if (rootView == null) {
-            rootView = buildRootView();
+            this.rootView = buildRootView();
         }
+
         return rootView;
     }
 
-    /**
-     * build a RecyclerView from root
-     *
-     * @return
-     */
     @NonNull
     private RecyclerView buildRootView() {
         RecyclerView recyclerView = new RecyclerView(context);
@@ -71,10 +63,9 @@ public class TreeView implements SelectableTreeAction {
          */
         recyclerView.setMotionEventSplittingEnabled(false);
 
-        recyclerView.setItemAnimator(itemAnimator != null ? itemAnimator : new StaticAnimator());
+        recyclerView.setItemAnimator(itemAnimator != null ? itemAnimator : new TreeItemAnimator());
         SimpleItemAnimator itemAnimator = (SimpleItemAnimator) recyclerView.getItemAnimator();
         itemAnimator.setSupportsChangeAnimations(false);
-
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         adapter = new TreeViewAdapter(context, root, baseNodeViewFactory);
         recyclerView.setAdapter(adapter);
@@ -88,7 +79,6 @@ public class TreeView implements SelectableTreeAction {
         }
         TreeHelper.expandAll(root);
 
-        //change too much data set,just notifyDataSetChanged
         refreshTreeView();
     }
 
@@ -108,7 +98,6 @@ public class TreeView implements SelectableTreeAction {
     public void expandLevel(int level) {
         TreeHelper.expandLevel(root, level);
 
-        //change too much data set,just notifyDataSetChanged
         refreshTreeView();
     }
 
@@ -119,7 +108,6 @@ public class TreeView implements SelectableTreeAction {
         }
         TreeHelper.collapseAll(root);
 
-        //change too much data set,just notifyDataSetChanged
         refreshTreeView();
     }
 
@@ -132,7 +120,6 @@ public class TreeView implements SelectableTreeAction {
     public void collapseLevel(int level) {
         TreeHelper.collapseLevel(root, level);
 
-        //change too much data set,just notifyDataSetChanged
         refreshTreeView();
     }
 
@@ -164,26 +151,34 @@ public class TreeView implements SelectableTreeAction {
 
     @Override
     public void selectNode(TreeNode treeNode) {
-
+        if (treeNode != null) {
+            adapter.selectNode(true, treeNode);
+        }
     }
 
     @Override
-    public void disSelectNode(TreeNode treeNode) {
-
+    public void deselectNode(TreeNode treeNode) {
+        if (treeNode != null) {
+            adapter.selectNode(false, treeNode);
+        }
     }
 
     @Override
     public void selectAll() {
+        TreeHelper.selectNodeAndChild(root, true);
 
+        refreshTreeView();
     }
 
     @Override
-    public void disSelectAll() {
+    public void deselectAll() {
+        TreeHelper.selectNodeAndChild(root, false);
 
+        refreshTreeView();
     }
 
     @Override
     public List<TreeNode> getSelectedNodes() {
-        return null;
+        return TreeHelper.getSelectedNodes(root);
     }
 }

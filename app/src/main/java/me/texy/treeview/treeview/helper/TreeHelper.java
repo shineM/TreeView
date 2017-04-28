@@ -226,11 +226,25 @@ public class TreeHelper {
             impactedParents.addAll(selectParentIfNeedWhenNodeSelected(parent, true));
         } else if (!select && selectedBrotherCount == brothers.size() - 1) {
             // only the condition that the size of selected's brothers
-            // is one less than total count can trigger the disSelect
+            // is one less than total count can trigger the deselect
             parent.setSelected(false);
             impactedParents.add(parent);
             impactedParents.addAll(selectParentIfNeedWhenNodeSelected(parent, false));
         }
         return impactedParents;
+    }
+
+    public static List<TreeNode> getSelectedNodes(TreeNode treeNode) {
+        List<TreeNode> selectedNodes = new ArrayList<>();
+        if (treeNode == null) {
+            return selectedNodes;
+        }
+
+        if (treeNode.isSelected()) selectedNodes.add(treeNode);
+
+        for (TreeNode child : treeNode.getChildren()) {
+            selectedNodes.addAll(getSelectedNodes(child));
+        }
+        return selectedNodes;
     }
 }

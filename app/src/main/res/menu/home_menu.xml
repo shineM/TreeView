@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/select_all"
+        android:orderInCategory="200"
+        android:title="Select All"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/deselect_all"
+        android:orderInCategory="200"
+        android:title="Deselect All"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/expand_all"
+        android:orderInCategory="200"
+        android:title="Expand All"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/collapse_all"
+        android:orderInCategory="200"
+
+        android:title="Collapse All"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/expand_level"
+        android:orderInCategory="200"
+        android:title="Expand Level 1"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/collapse_level"
+        android:orderInCategory="200"
+        android:title="Collapse Level 1"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/show_select_node"
+        android:orderInCategory="200"
+        android:title="Show Selections"
+        app:showAsAction="never" />
+</menu>

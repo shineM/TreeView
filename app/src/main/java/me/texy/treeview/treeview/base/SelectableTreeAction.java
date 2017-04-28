@@ -12,11 +12,11 @@ import me.texy.treeview.treeview.base.BaseTreeAction;
 public interface SelectableTreeAction extends BaseTreeAction {
     void selectNode(TreeNode treeNode);
 
-    void disSelectNode(TreeNode treeNode);
+    void deselectNode(TreeNode treeNode);
 
     void selectAll();
 
-    void disSelectAll();
+    void deselectAll();
 
     List<TreeNode> getSelectedNodes();
 }
