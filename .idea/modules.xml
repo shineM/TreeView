@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/TreeView.iml" filepath="$PROJECT_DIR$/TreeView.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/treeview_lib/treeview_lib.iml" filepath="$PROJECT_DIR$/treeview_lib/treeview_lib.iml" />
     </modules>
   </component>
 </project>
