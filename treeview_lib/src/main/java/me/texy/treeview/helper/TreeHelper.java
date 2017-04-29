@@ -190,6 +190,8 @@ public class TreeHelper {
             return expandChildren;
         }
 
+        treeNode.setSelected(select);
+
         if (!treeNode.hasChild()) {
             return expandChildren;
         }
