@@ -1,11 +1,11 @@
-# TreeView
+## TreeView
 An android tree view with high performance and rich functions
-## Usage
-**添加依赖**
+### Usage
+**Reference the library from your module's build.gradle:**
 ```groovy
 compile 'me.texy.treeview:treeview_lib:1.0.1'
 ```
-**实现BaseNodeViewBinder**
+**Implement your all level's BaseNodeViewBinder**
 
 Sample：
 ```java
@@ -32,9 +32,9 @@ ThirdLevelNodeViewBinder
 .
 .
 ```
-如果需要用选择功能则继承自CheckableNodeViewBinder
+If you want add the selectable feature,replace BaseNodeViewBinder with CheckableNodeViewBinder.
 
-**实现BaseNodeViewFactory**
+**Implement the BaseNodeViewFactory**
 
 Sample：
 ```java
@@ -54,8 +54,9 @@ public class MyNodeViewFactory extends BaseNodeViewFactory {
   }
 }
 ```
+If you do not want to create a class file,just implement a anonymous inner class in TreeView's constructor
 
-**生成TreeView**
+**Add TreeView to wherever you want**
 
 Sample:
 ```java
@@ -69,3 +70,21 @@ for (int i = 0; i < 5; i++) {
 View treeView = new TreeView(root, context, new MyNodeViewFactory()).getView();
 //add to view group where you want 
 ```
+
+### License
+
+    Copyright 2016 shineM.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+
