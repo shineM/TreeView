@@ -10,7 +10,7 @@ There are some gifs from Demo:
 * Select node:
 <img src='images/show_demo_select.gif' width='240'/>
 
-* More feature:
+* Operate all:
 <img src='images/show_demo_more_featrue.gif' width='240'/>
 
 ### Feature
