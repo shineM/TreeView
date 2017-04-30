@@ -24,11 +24,11 @@ There are some gifs from Demo:
 - getAllSelectedNodes
 
 ### Usage
-**Reference the library from your module's build.gradle:**
+**1.Reference the library from your module's build.gradle:**
 ```groovy
 compile 'me.texy.treeview:treeview_lib:1.0.1'
 ```
-**Implement your all level's BaseNodeViewBinder**
+**2.Implement your all level's BaseNodeViewBinder**
 
 Sample：
 ```java
@@ -57,7 +57,7 @@ ThirdLevelNodeViewBinder
 ```
 If you want add the selectable feature,replace BaseNodeViewBinder with CheckableNodeViewBinder.
 
-**Implement the BaseNodeViewFactory**
+**3.Implement the BaseNodeViewFactory**
 
 Sample：
 ```java
@@ -79,7 +79,7 @@ public class MyNodeViewFactory extends BaseNodeViewFactory {
 ```
 If you do not want to create a class file,just implement a anonymous inner class in TreeView's constructor
 
-**Add TreeView to wherever you want**
+**4.Add TreeView to wherever you want**
 
 Sample:
 ```java
