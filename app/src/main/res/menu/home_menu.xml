@@ -2,6 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/expand_all"
+        android:orderInCategory="200"
+        android:title="Expand All"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/collapse_all"
+        android:orderInCategory="200"
+        android:title="Collapse All"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/select_all"
         android:orderInCategory="200"
         android:title="Select All"
@@ -10,17 +20,6 @@
         android:id="@+id/deselect_all"
         android:orderInCategory="200"
         android:title="Deselect All"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/expand_all"
-        android:orderInCategory="200"
-        android:title="Expand All"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/collapse_all"
-        android:orderInCategory="200"
-
-        android:title="Collapse All"
         app:showAsAction="never" />
     <item
         android:id="@+id/expand_level"
