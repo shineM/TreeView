@@ -5,16 +5,13 @@ An android tree view with high performance and rich functions
 There are some gifs from Demo:
 
 * Base tree actions:
-
-![show_demo_base](images/show_demo_base.gif)
+<img src='images/show_demo_base.gif' width='240'/>
 
 * Select node:
-
-![show_demo_select](images/show_demo_select.gif)
+<img src='images/show_demo_select.gif' width='240'/>
 
 * More feature:
-
-![show_demo_more_feature](images/show_demo_more_feature.gif)
+<img src='images/show_demo_more_featrue.gif' width='240'/>
 
 ### Feature
 - expandAll/collapseAll
