@@ -1,5 +1,31 @@
 ## TreeView
 An android tree view with high performance and rich functions
+
+### Captures
+There are some gifs from Demo:
+
+* Base tree actions:
+
+![show_demo_base](images/show_demo_base.gif)
+
+* Select node:
+
+![show_demo_select](images/show_demo_select.gif)
+
+* More feature:
+
+![show_demo_more_feature](images/show_demo_more_feature.gif)
+
+### Feature
+- expandAll/collapseAll
+- expandNode/collapseNode
+- expandLevel/collapseLevel
+- toggleNode
+- deleteNode/addNode
+- selectNode/deselectNode
+- selectAll/deselectAll
+- getAllSelectedNodes
+
 ### Usage
 **Reference the library from your module's build.gradle:**
 ```groovy
