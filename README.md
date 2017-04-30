@@ -13,7 +13,7 @@ There are some gifs from Demo:
 * Operate all:
 <img src='images/show_demo_more_featrue.gif' width='240'/>
 
-### Feature
+### Features
 - expandAll/collapseAll
 - expandNode/collapseNode
 - expandLevel/collapseLevel
