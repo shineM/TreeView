@@ -96,7 +96,7 @@ View treeView = new TreeView(root, context, new MyNodeViewFactory()).getView();
 
 ### License
 
-    Copyright 2016 shineM.
+    Copyright 2017 shineM.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
