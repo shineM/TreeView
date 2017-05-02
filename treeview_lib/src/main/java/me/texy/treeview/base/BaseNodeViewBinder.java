@@ -39,11 +39,9 @@ public abstract class BaseNodeViewBinder extends RecyclerView.ViewHolder {
     /**
      * Bind your data to view,you can get the data from treeNode by getValue()
      *
-     * @param view     Node view
      * @param treeNode Node data
      */
-    public abstract void bindView(View view, TreeNode treeNode);
-
+    public abstract void bindView(TreeNode treeNode);
     /**
      * if you do not want toggle the node when click whole item view,then you can assign a view to
      * trigger the toggle action
@@ -57,11 +55,10 @@ public abstract class BaseNodeViewBinder extends RecyclerView.ViewHolder {
     /**
      * Callback when a toggle action happened
      *
-     * @param item     The toggled itemView
      * @param treeNode The toggled node
      * @param expand   Expanded or collapsed
      */
-    public void onNodeToggled(View item, TreeNode treeNode, boolean expand) {
+    public void onNodeToggled(TreeNode treeNode, boolean expand) {
         //empty
     }
 }

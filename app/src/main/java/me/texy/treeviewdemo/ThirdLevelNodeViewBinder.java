@@ -12,9 +12,10 @@ import me.texy.treeview.base.CheckableNodeViewBinder;
  */
 
 public class ThirdLevelNodeViewBinder extends CheckableNodeViewBinder {
-
+    TextView textView;
     public ThirdLevelNodeViewBinder(View itemView) {
         super(itemView);
+        textView = (TextView) itemView.findViewById(R.id.node_name_view);
     }
 
     @Override
@@ -28,8 +29,7 @@ public class ThirdLevelNodeViewBinder extends CheckableNodeViewBinder {
     }
 
     @Override
-    public void bindView(View view, TreeNode treeNode) {
-        TextView textView = (TextView) view.findViewById(R.id.node_name_view);
+    public void bindView(TreeNode treeNode) {
         textView.setText(treeNode.getValue().toString());
     }
 }

@@ -106,7 +106,7 @@ public class TreeViewAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         final View nodeView = holder.itemView;
         final TreeNode treeNode = expandedNodeList.get(position);
-        final BaseNodeViewBinder viewBinder = getNodeBinder(treeNode);
+        final BaseNodeViewBinder viewBinder = (BaseNodeViewBinder) holder;
 
         if (viewBinder.getToggleTriggerViewId() != 0) {
             View triggerToggleView = nodeView.findViewById(viewBinder.getToggleTriggerViewId());
@@ -116,7 +116,7 @@ public class TreeViewAdapter extends RecyclerView.Adapter {
                     @Override
                     public void onClick(View v) {
                         onNodeToggled(treeNode);
-                        viewBinder.onNodeToggled(nodeView, treeNode, treeNode.isExpanded());
+                        viewBinder.onNodeToggled(treeNode, treeNode.isExpanded());
                     }
                 });
             }
@@ -125,7 +125,7 @@ public class TreeViewAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View v) {
                     onNodeToggled(treeNode);
-                    viewBinder.onNodeToggled(nodeView, treeNode, treeNode.isExpanded());
+                    viewBinder.onNodeToggled(treeNode, treeNode.isExpanded());
                 }
             });
         }
@@ -151,7 +151,7 @@ public class TreeViewAdapter extends RecyclerView.Adapter {
             }
         }
 
-        viewBinder.bindView(nodeView, treeNode);
+        viewBinder.bindView(treeNode);
     }
 
     public void selectNode(boolean checked, TreeNode treeNode) {
@@ -187,10 +187,6 @@ public class TreeViewAdapter extends RecyclerView.Adapter {
         } else {
             collapseNode(treeNode);
         }
-    }
-
-    private BaseNodeViewBinder getNodeBinder(TreeNode treeNode) {
-        return baseNodeViewFactory.getNodeViewBinder(EMPTY_PARAMETER, treeNode.getLevel());
     }
 
     @Override
