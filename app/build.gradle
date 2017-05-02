@@ -27,7 +27,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.0.0'
     compile 'com.android.support:recyclerview-v7:25.0.0'
     testCompile 'junit:junit:4.12'
-//    compile project(':treeview_lib')
-    compile 'me.texy.treeview:treeview_lib:1.0.1'
+    compile project(':treeview_lib')
+//    compile 'me.texy.treeview:treeview_lib:1.0.1'
 
 }
