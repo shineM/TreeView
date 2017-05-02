@@ -26,15 +26,17 @@ There are some gifs from Demo:
 ### Usage
 **1.Reference the library from your module's build.gradle:**
 ```groovy
-compile 'me.texy.treeview:treeview_lib:1.0.1'
+compile 'me.texy.treeview:treeview_lib:1.0.2'
 ```
 **2.Implement your all level's BaseNodeViewBinder**
 
 Sample：
 ```java
 public class FirstLevelNodeViewBinder extends BaseNodeViewBinder {
+  TextView textView;
   public FirstLevelNodeViewBinder(View itemView) { 
     super(itemView);  
+    textView = (TextView) view.findViewById(R.id.node_name_view)
   }
   
   @Override
@@ -43,8 +45,7 @@ public class FirstLevelNodeViewBinder extends BaseNodeViewBinder {
   }
   
   @Override
-  public void bindView(View view, final TreeNode treeNode) {
-    TextView textView = (TextView) view.findViewById(R.id.node_name_view)
+  public void bindView(TreeNode treeNode) {
     textView.setText(treeNode.getValue().toString());
   }
 }
