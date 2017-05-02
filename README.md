@@ -4,9 +4,6 @@ An android tree view with high performance and rich functions
 ### Captures
 There are some gifs from Demo:
 
-* Base tree actions:
-<img src='images/show_demo_base.gif' width='240'/>
-
 * Select node:
 <img src='images/show_demo_select.gif' width='240'/>
 
