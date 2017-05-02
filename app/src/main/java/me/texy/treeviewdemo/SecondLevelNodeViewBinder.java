@@ -14,8 +14,12 @@ import me.texy.treeview.base.CheckableNodeViewBinder;
 
 public class SecondLevelNodeViewBinder extends CheckableNodeViewBinder {
 
+    TextView textView;
+    ImageView imageView;
     public SecondLevelNodeViewBinder(View itemView) {
         super(itemView);
+        textView = (TextView) itemView.findViewById(R.id.node_name_view);
+        imageView = (ImageView) itemView.findViewById(R.id.arrow_img);
     }
 
     @Override
@@ -29,17 +33,13 @@ public class SecondLevelNodeViewBinder extends CheckableNodeViewBinder {
     }
 
     @Override
-    public void bindView(View view, final TreeNode treeNode) {
-        TextView textView = (TextView) view.findViewById(R.id.node_name_view);
-        ImageView imageView = (ImageView) view.findViewById(R.id.arrow_img);
-
+    public void bindView(final TreeNode treeNode) {
         textView.setText(treeNode.getValue().toString());
         imageView.setRotation(treeNode.isExpanded() ? 90 : 0);
     }
 
     @Override
-    public void onNodeToggled(View item, TreeNode treeNode, boolean expand) {
-        ImageView imageView = (ImageView) item.findViewById(R.id.arrow_img);
+    public void onNodeToggled(TreeNode treeNode, boolean expand) {
         if (expand) {
             imageView.animate().rotation(90).setDuration(200).start();
         } else {

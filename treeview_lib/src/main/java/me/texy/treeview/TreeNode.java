@@ -67,6 +67,18 @@ public class TreeNode {
         }
     }
 
+    public boolean isLastChild() {
+        if (parent == null) {
+            return false;
+        }
+        List<TreeNode> children = parent.getChildren();
+        return children.size() > 0 && children.indexOf(this) == children.size() - 1;
+    }
+
+    public boolean isRoot() {
+        return parent == null;
+    }
+
     public int getLevel() {
         return level;
     }
@@ -141,4 +153,5 @@ public class TreeNode {
     public void setSelected(boolean selected) {
         this.selected = selected;
     }
+
 }
