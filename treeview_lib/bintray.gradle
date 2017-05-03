@@ -1,7 +1,7 @@
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 // This is the library version used when deploying the artifact
-version = "1.0.2"
+version = "1.0.3"
 
 def siteUrl = 'https://github.com/shinem/TreeView'    // 项目的主页
 def gitUrl = 'https://github.com/shinem/TreeView.git'   // Git仓库的url
