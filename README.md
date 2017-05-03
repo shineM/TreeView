@@ -23,7 +23,7 @@ There are some gifs from Demo:
 ### Usage
 **1.Reference the library from your module's build.gradle:**
 ```groovy
-compile 'me.texy.treeview:treeview_lib:1.0.2'
+compile 'me.texy.treeview:treeview_lib:1.0.3'
 ```
 **2.Implement your all level's BaseNodeViewBinder**
 
