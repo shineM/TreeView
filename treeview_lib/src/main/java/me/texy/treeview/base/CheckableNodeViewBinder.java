@@ -16,6 +16,8 @@ package me.texy.treeview.base;
 
 import android.view.View;
 
+import me.texy.treeview.TreeNode;
+
 /**
  * Created by xinyuanzhong on 2017/4/27.
  */
@@ -32,4 +34,14 @@ public abstract class CheckableNodeViewBinder extends BaseNodeViewBinder {
      * @return
      */
     public abstract int getCheckableViewId();
+
+    /**
+     * Do something when a node select or deselect（only triggered by clicked）
+     *
+     * @param treeNode
+     * @param selected
+     */
+    public void onNodeSelectedChanged(TreeNode treeNode, boolean selected) {
+        /*empty*/
+    }
 }

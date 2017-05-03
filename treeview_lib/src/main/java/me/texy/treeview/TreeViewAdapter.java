@@ -56,6 +56,8 @@ public class TreeViewAdapter extends RecyclerView.Adapter {
      */
     private View EMPTY_PARAMETER;
 
+    private TreeView treeView;
+
     public TreeViewAdapter(Context context, TreeNode root,
                            @NonNull BaseNodeViewFactory baseNodeViewFactory) {
         this.context = context;
@@ -99,7 +101,9 @@ public class TreeViewAdapter extends RecyclerView.Adapter {
         View view = LayoutInflater.from(context).inflate(baseNodeViewFactory
                 .getNodeViewBinder(EMPTY_PARAMETER, level).getLayoutId(), parent, false);
 
-        return baseNodeViewFactory.getNodeViewBinder(view, level);
+        BaseNodeViewBinder nodeViewBinder = baseNodeViewFactory.getNodeViewBinder(view, level);
+        nodeViewBinder.setTreeView(treeView);
+        return nodeViewBinder;
     }
 
     @Override
@@ -143,6 +147,7 @@ public class TreeViewAdapter extends RecyclerView.Adapter {
                     public void onClick(View v) {
                         boolean checked = checkableView.isChecked();
                         selectNode(checked, treeNode);
+                        ((CheckableNodeViewBinder) viewBinder).onNodeSelectedChanged(treeNode, checked);
                     }
                 });
             } else {
@@ -284,5 +289,9 @@ public class TreeViewAdapter extends RecyclerView.Adapter {
             expandedNodeList.remove(node);
         }
         notifyItemRemoved(index);
+    }
+
+    public void setTreeView(TreeView treeView) {
+        this.treeView = treeView;
     }
 }

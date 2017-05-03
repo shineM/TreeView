@@ -283,4 +283,24 @@ public class TreeHelper {
         }
         return selectedNodes;
     }
+
+    /**
+     * Return true when the node has one selected child(recurse all children) at least,
+     * otherwise return false
+     *
+     * @param treeNode
+     * @return
+     */
+    public static boolean hasOneSelectedNodeAtLeast(TreeNode treeNode) {
+        if (treeNode == null || treeNode.getChildren().size() == 0) {
+            return false;
+        }
+        List<TreeNode> children = treeNode.getChildren();
+        for (TreeNode child : children) {
+            if (child.isSelected() || hasOneSelectedNodeAtLeast(child)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

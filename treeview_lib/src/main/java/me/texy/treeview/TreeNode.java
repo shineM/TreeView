@@ -59,7 +59,7 @@ public class TreeNode {
 
 
     public void removeChild(TreeNode treeNode) {
-        if (treeNode == null || treeNode.getChildren().size() < 1) {
+        if (treeNode == null || getChildren().size() < 1) {
             return;
         }
         if (getChildren().indexOf(treeNode) != -1) {

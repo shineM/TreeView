@@ -23,10 +23,10 @@ import android.view.View;
 
 import java.util.List;
 
+import me.texy.treeview.animator.TreeItemAnimator;
 import me.texy.treeview.base.BaseNodeViewFactory;
 import me.texy.treeview.base.SelectableTreeAction;
 import me.texy.treeview.helper.TreeHelper;
-import me.texy.treeview.animator.TreeItemAnimator;
 
 /**
  * Created by xinyuanzhong on 2017/4/20.
@@ -43,6 +43,8 @@ public class TreeView implements SelectableTreeAction {
 
     private TreeViewAdapter adapter;
 
+    private boolean itemSelectable = true;
+
     public void setItemAnimator(RecyclerView.ItemAnimator itemAnimator) {
         this.itemAnimator = itemAnimator;
         if (rootView != null && itemAnimator != null) {
@@ -52,7 +54,7 @@ public class TreeView implements SelectableTreeAction {
 
     private RecyclerView.ItemAnimator itemAnimator;
 
-    public TreeView(@NonNull TreeNode root, @NonNull Context context,@NonNull BaseNodeViewFactory baseNodeViewFactory) {
+    public TreeView(@NonNull TreeNode root, @NonNull Context context, @NonNull BaseNodeViewFactory baseNodeViewFactory) {
         this.root = root;
         this.context = context;
         this.baseNodeViewFactory = baseNodeViewFactory;
@@ -83,6 +85,7 @@ public class TreeView implements SelectableTreeAction {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         adapter = new TreeViewAdapter(context, root, baseNodeViewFactory);
+        adapter.setTreeView(this);
         recyclerView.setAdapter(adapter);
         return recyclerView;
     }
@@ -98,7 +101,7 @@ public class TreeView implements SelectableTreeAction {
     }
 
 
-    private void refreshTreeView() {
+    public void refreshTreeView() {
         if (rootView != null) {
             ((TreeViewAdapter) rootView.getAdapter()).refreshView();
         }
@@ -196,4 +199,13 @@ public class TreeView implements SelectableTreeAction {
     public List<TreeNode> getSelectedNodes() {
         return TreeHelper.getSelectedNodes(root);
     }
+
+    public boolean isItemSelectable() {
+        return itemSelectable;
+    }
+
+    public void setItemSelectable(boolean itemSelectable) {
+        this.itemSelectable = itemSelectable;
+    }
+
 }
