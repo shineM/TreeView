@@ -1,5 +1,7 @@
 ## TreeView
-An android tree view with high performance and rich functions [中文介绍](http://texy.me/2017/05/01/android_tree_view/)
+An android tree view with high performance and rich functions 
+
+[中文介绍](http://texy.me/2017/05/01/android_tree_view/)
 
 ### Captures
 There are some gifs from Demo:
