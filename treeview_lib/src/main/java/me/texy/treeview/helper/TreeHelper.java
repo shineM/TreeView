@@ -203,7 +203,7 @@ public class TreeHelper {
                 if (child.isExpanded()) {
                     expandChildren.addAll(selectNodeAndChild(child, select));
                 } else {
-                    selectNodeInner(treeNode, select);
+                    selectNodeInner(child, select);
                 }
             }
         } else {
