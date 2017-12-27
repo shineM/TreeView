@@ -254,10 +254,17 @@ public class TreeHelper {
             parent.setSelected(true);
             impactedParents.add(parent);
             impactedParents.addAll(selectParentIfNeedWhenNodeSelected(parent, true));
+        } else if(select){
+            impactedParents.add(parent);
+            impactedParents.addAll(selectParentIfNeedWhenNodeSelected(parent, true));
         } else if (!select && selectedBrotherCount == brothers.size() - 1) {
             // only the condition that the size of selected's brothers
             // is one less than total count can trigger the deselect
             parent.setSelected(false);
+            impactedParents.add(parent);
+            impactedParents.addAll(selectParentIfNeedWhenNodeSelected(parent, false));
+        } else {
+            // only some selected/deselected: refresh parent view
             impactedParents.add(parent);
             impactedParents.addAll(selectParentIfNeedWhenNodeSelected(parent, false));
         }

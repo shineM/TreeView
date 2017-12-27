@@ -29,5 +29,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile project(':treeview_lib')
 //    compile 'me.texy.treeview:treeview_lib:1.0.1'
+    compile 'com.github.sevar83:indeterminate-checkbox:1.0.5@aar'
 
 }

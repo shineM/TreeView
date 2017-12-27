@@ -29,5 +29,7 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:25.0.0'
     compile 'com.android.support:appcompat-v7:25.0.0'
     testCompile 'junit:junit:4.12'
+    compile 'org.jetbrains:annotations-java5:15.0'
+    compile 'com.github.sevar83:indeterminate-checkbox:1.0.5@aar'
 }
 apply from: "bintray.gradle"
