@@ -26,9 +26,23 @@ Now supports [sevar83's IndeterminateCheckBox](https://github.com/sevar83/indete
 
 ### Usage
 **1.Reference the library from your module's build.gradle:**
-```groovy
-compile 'me.texy.treeview:treeview_lib:1.0.3'
-```
+1. You need to have this in your project's `build.gradle` file:
+
+    ```Gradle
+    allprojects {
+        repositories {
+            jcenter()
+            maven { url "https://jitpack.io" }
+        }
+    }
+    ```
+2. You need this in your app's module `build.gradle` file:
+    ```Gradle
+    dependencies {
+        compile 'com.github.penguin86:TreeView:1.0.5@aar'
+    }
+    ```
+
 **2.Implement your all level's BaseNodeViewBinder**
 
 Sample：
