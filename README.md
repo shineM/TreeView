@@ -22,6 +22,8 @@ There are some gifs from Demo:
 - selectAll/deselectAll
 - getAllSelectedNodes
 
+Now supports [sevar83's IndeterminateCheckBox](https://github.com/sevar83/indeterminate-checkbox) as well as Android's android.widget.CheckBox
+
 ### Usage
 **1.Reference the library from your module's build.gradle:**
 ```groovy
