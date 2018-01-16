@@ -15,12 +15,15 @@
 package me.texy.treeview;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+
+import com.buildware.widget.indeterm.IndeterminateCheckBox;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -140,7 +143,14 @@ public class TreeViewAdapter extends RecyclerView.Adapter {
 
             if (view != null && view instanceof CheckBox) {
                 final CheckBox checkableView = (CheckBox) view;
-                checkableView.setChecked(treeNode.isSelected());
+
+                if(treeNode.isSelected()){
+                    checkableView.setChecked(true);
+                } else if(view instanceof IndeterminateCheckBox && TreeHelper.hasOneSelectedNodeAtLeast(treeNode)) {
+                        ((IndeterminateCheckBox) view).setIndeterminate(true);
+                } else {
+                    checkableView.setChecked(false);
+                }
 
                 checkableView.setOnClickListener(new View.OnClickListener() {
                     @Override
