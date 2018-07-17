@@ -15,8 +15,6 @@
  */
 package me.texy.treeview.animator;
 
-import android.animation.TimeInterpolator;
-import android.animation.ValueAnimator;
 import android.support.annotation.NonNull;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorCompat;
@@ -35,7 +33,6 @@ import java.util.List;
  */
 public class DefaultItemAnimator extends SimpleItemAnimator {
     private static final boolean DEBUG = false;
-    private static TimeInterpolator sTimeInterpolator;
 
     private ArrayList<ViewHolder> mPendingRemovals = new ArrayList<>();
     private ArrayList<ViewHolder> mPendingAdditions = new ArrayList<>();
@@ -519,10 +516,6 @@ public class DefaultItemAnimator extends SimpleItemAnimator {
     }
 
     private void resetAnimation(ViewHolder holder) {
-        if (sTimeInterpolator == null) {
-            sTimeInterpolator = new ValueAnimator().getInterpolator();
-        }
-        holder.itemView.animate().setInterpolator(sTimeInterpolator);
         endAnimation(holder);
     }
 
