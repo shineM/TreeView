@@ -20,12 +20,13 @@ There are some gifs from Demo:
 - deleteNode/addNode
 - selectNode/deselectNode
 - selectAll/deselectAll
-- getAllSelectedNodes
+- getSelectedNodes
+- refreshTreeView
 
 ### Usage
 **1.Reference the library from your module's build.gradle:**
 ```groovy
-compile 'me.texy.treeview:treeview_lib:1.0.3'
+implementation 'me.texy.treeview:treeview_lib:1.0.4'
 ```
 **2.Implement your all level's BaseNodeViewBinder**
 
