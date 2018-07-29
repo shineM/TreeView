@@ -110,6 +110,16 @@ public class TreeNode {
         return children;
     }
 
+    public List<TreeNode> getSelectedChildren() {
+        List<TreeNode> selectedChildren = new ArrayList<>();
+        for (TreeNode child : getChildren()) {
+            if (child.isSelected()) {
+                selectedChildren.add(child);
+            }
+        }
+        return selectedChildren;
+    }
+
     public void setChildren(List<TreeNode> children) {
         this.children = children;
     }
