@@ -18,8 +18,8 @@ public class SecondLevelNodeViewBinder extends CheckableNodeViewBinder {
     ImageView imageView;
     public SecondLevelNodeViewBinder(View itemView) {
         super(itemView);
-        textView = (TextView) itemView.findViewById(R.id.node_name_view);
-        imageView = (ImageView) itemView.findViewById(R.id.arrow_img);
+        textView = itemView.findViewById(R.id.node_name_view);
+        imageView = itemView.findViewById(R.id.arrow_img);
     }
 
     @Override

@@ -36,7 +36,7 @@ public class FirstLevelNodeViewBinder extends BaseNodeViewBinder {
   TextView textView;
   public FirstLevelNodeViewBinder(View itemView) { 
     super(itemView);  
-    textView = (TextView) itemView.findViewById(R.id.node_name_view)
+    textView = (TextView) itemView.findViewById(R.id.node_name_view);
   }
   
   @Override

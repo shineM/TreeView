@@ -11,4 +11,8 @@
         <item name="android:windowNoTitle">true</item>
     </style>
 
+    <style name="ThemeOverlay.AppTheme.LightRipple" parent="AppTheme">
+        <item name="colorControlHighlight">#4dffffff</item>
+    </style>
+
 </resources>

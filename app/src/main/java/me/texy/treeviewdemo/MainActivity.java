@@ -3,9 +3,9 @@ package me.texy.treeviewdemo;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -79,9 +79,9 @@ public class MainActivity extends AppCompatActivity {
         List<TreeNode> selectedNodes = treeView.getSelectedNodes();
         for (int i = 0; i < selectedNodes.size(); i++) {
             if (i < 5) {
-                stringBuilder.append(selectedNodes.get(i).getValue().toString() + ",");
+                stringBuilder.append(selectedNodes.get(i).getValue().toString()).append(",");
             } else {
-                stringBuilder.append("...and " + (selectedNodes.size() - 5) + " more.");
+                stringBuilder.append("...and ").append(selectedNodes.size() - 5).append(" more.");
                 break;
             }
         }
@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         viewGroup = (RelativeLayout) findViewById(R.id.container);
         setSupportActionBar(toolbar);
         setLightStatusBar(viewGroup);
