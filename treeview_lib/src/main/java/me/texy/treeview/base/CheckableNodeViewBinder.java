@@ -29,7 +29,7 @@ public abstract class CheckableNodeViewBinder extends BaseNodeViewBinder {
     }
 
     /**
-     * Get the checkable view id. MUST BE A CheckBox CLASS！
+     * Get the checkable view id. MUST BE A CheckBox type！
      *
      * @return
      */

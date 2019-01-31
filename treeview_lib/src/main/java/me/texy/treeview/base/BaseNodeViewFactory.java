@@ -28,7 +28,7 @@ public abstract class BaseNodeViewFactory {
      * @param view  The parameter for BaseNodeViewBinder's constructor, do not use this for other
      *              purpose!
      * @param level The treeNode level
-     * @return
+     * @return BaseNodeViewBinder
      */
     public abstract BaseNodeViewBinder getNodeViewBinder(View view, int level);
 

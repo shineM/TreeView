@@ -148,7 +148,7 @@ public class TreeNode {
         return getLevel() + "," + getIndex();
     }
 
-    private int getIndex() {
+    public int getIndex() {
         return index;
     }
 

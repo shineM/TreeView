@@ -68,7 +68,6 @@ public class TreeHelper {
      *
      * @param root  the tree root
      * @param level the level to expand
-     * @return
      */
     public static void expandLevel(TreeNode root, int level) {
         if (root == null) {
@@ -81,7 +80,6 @@ public class TreeHelper {
             } else {
                 expandLevel(child, level);
             }
-
         }
     }
 
@@ -178,10 +176,6 @@ public class TreeHelper {
 
     /**
      * Select the node and node's children,return the visible nodes
-     *
-     * @param treeNode
-     * @param select
-     * @return
      */
     public static List<TreeNode> selectNodeAndChild(TreeNode treeNode, boolean select) {
         List<TreeNode> expandChildren = new ArrayList<>();
@@ -227,10 +221,6 @@ public class TreeHelper {
     /**
      * Select parent when all the brothers have been selected, otherwise deselect parent,
      * and check the grand parent recursive.
-     *
-     * @param treeNode
-     * @param select
-     * @return
      */
     public static List<TreeNode> selectParentIfNeedWhenNodeSelected(TreeNode treeNode, boolean select) {
         List<TreeNode> impactedParents = new ArrayList<>();
@@ -266,9 +256,6 @@ public class TreeHelper {
 
     /**
      * Get the selected nodes under current node, include itself
-     *
-     * @param treeNode
-     * @return
      */
     public static List<TreeNode> getSelectedNodes(TreeNode treeNode) {
         List<TreeNode> selectedNodes = new ArrayList<>();
@@ -287,9 +274,6 @@ public class TreeHelper {
     /**
      * Return true when the node has one selected child(recurse all children) at least,
      * otherwise return false
-     *
-     * @param treeNode
-     * @return
      */
     public static boolean hasOneSelectedNodeAtLeast(TreeNode treeNode) {
         if (treeNode == null || treeNode.getChildren().size() == 0) {

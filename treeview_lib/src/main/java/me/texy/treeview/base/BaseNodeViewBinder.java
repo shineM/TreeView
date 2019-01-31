@@ -41,8 +41,6 @@ public abstract class BaseNodeViewBinder extends RecyclerView.ViewHolder {
 
     /**
      * Get node item layout id
-     *
-     * @return
      */
     public abstract int getLayoutId();
 
