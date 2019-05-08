@@ -119,10 +119,16 @@ public class TreeNode {
         }
         return selectedChildren;
     }
-
+    
     public void setChildren(List<TreeNode> children) {
-        this.children = children;
-    }
+        if (children == null) {
+            return;
+        }        
+        this.children = new ArrayList<>();
+        for (TreeNode child : children) {
+            addChild(child);
+        }
+    }    
 
     public void setExpanded(boolean expanded) {
         this.expanded = expanded;
