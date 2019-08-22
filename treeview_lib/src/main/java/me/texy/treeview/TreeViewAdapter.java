@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
+import android.widget.Checkable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -137,11 +137,11 @@ public class TreeViewAdapter extends RecyclerView.Adapter {
                                     final CheckableNodeViewBinder viewBinder) {
         final View view = nodeView.findViewById(viewBinder.getCheckableViewId());
 
-        if (view instanceof CheckBox) {
-            final CheckBox checkableView = (CheckBox) view;
+        if (view instanceof Checkable) {
+            final Checkable checkableView = (Checkable) view;
             checkableView.setChecked(treeNode.isSelected());
 
-            checkableView.setOnClickListener(new View.OnClickListener() {
+            view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     boolean checked = checkableView.isChecked();
