@@ -16,6 +16,8 @@ package me.texy.treeview.base;
 
 import android.view.View;
 
+import me.texy.treeview.TreeNode;
+
 /**
  * Created by zxy on 17/4/23.
  */
@@ -23,13 +25,23 @@ import android.view.View;
 public abstract class BaseNodeViewFactory {
 
     /**
+    * The default implementation below behaves as in previous version when TreeViewAdapter.getItemViewType always returned the level,
+    * but you can override it if you want some other viewType value to become the parameter to the method getNodeViewBinder.
+    * @param treeNode
+    * @return
+    */
+    public int getViewType(TreeNode treeNode) {
+        return treeNode.getLevel();
+    }
+
+    /**
      * If you want build a tree view,you must implement this factory method
      *
      * @param view  The parameter for BaseNodeViewBinder's constructor, do not use this for other
      *              purpose!
-     * @param level The treeNode level
+     * @param viewType The viewType value is the treeNode level in the default implementation.
      * @return BaseNodeViewBinder
      */
-    public abstract BaseNodeViewBinder getNodeViewBinder(View view, int level);
+    public abstract BaseNodeViewBinder getNodeViewBinder(View view, int viewType);
 
 }
