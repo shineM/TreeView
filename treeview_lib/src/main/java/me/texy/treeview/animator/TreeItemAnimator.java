@@ -15,8 +15,8 @@
 package me.texy.treeview.animator;
 
 
-import android.support.v4.view.ViewCompat;
-import android.support.v7.widget.RecyclerView;
+import androidx.core.view.ViewCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by xinyuanzhong on 2017/4/28.
