@@ -95,10 +95,15 @@ public class MainActivity extends AppCompatActivity {
             for (int j = 0; j < 10; j++) {
                 TreeNode treeNode1 = new TreeNode(new String("Child " + "No." + j));
                 treeNode1.setLevel(1);
+                if(j < 9) { // avoids creating grand child nodes for the last child node
+                // For the last child node without grand children there should not be any arrow displayed.
+                // But currently it causes problem if not having the same number of levels for all child nodes
+                // i.e. the nodes without any child nodes will currently still show an arrow as if there were child nodes.
                 for (int k = 0; k < 5; k++) {
                     TreeNode treeNode2 = new TreeNode(new String("Grand Child " + "No." + k));
                     treeNode2.setLevel(2);
                     treeNode1.addChild(treeNode2);
+                }
                 }
                 treeNode.addChild(treeNode1);
             }
