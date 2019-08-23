@@ -83,7 +83,10 @@ public class TreeViewAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemViewType(int position) {
-        return expandedNodeList.get(position).getLevel();
+        // return expandedNodeList.get(position).getLevel(); // this old code row used to always return the level
+        TreeNode treeNode = expandedNodeList.get(position);
+        int viewType = this.baseNodeViewFactory.getViewType(treeNode); // default implementation returns the three node level but it can be overridden
+        return viewType;
     }
 
     @NonNull
