@@ -17,6 +17,8 @@ package me.texy.treeview;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.texy.treeview.helper.TreeHelper;
+
 /**
  * Created by xinyuanzhong on 2017/4/20.
  */
@@ -128,7 +130,26 @@ public class TreeNode {
         for (TreeNode child : children) {
             addChild(child);
         }
-    }    
+    }
+
+    /**
+     * Updating the list of children while maintaining the tree structure
+     */
+    public void updateChildren(List<TreeNode> children) {
+        List<Boolean> expands = new ArrayList<>();
+        List<TreeNode> allNodesPre = TreeHelper.getAllNodes(this);
+        for (TreeNode node : allNodesPre) {
+            expands.add(node.isExpanded());
+        }
+
+        this.children = children;
+        List<TreeNode> allNodes = TreeHelper.getAllNodes(this);
+        if (allNodes.size() == expands.size()) {
+            for (int i = 0; i < allNodes.size(); i++) {
+                allNodes.get(i).setExpanded(expands.get(i));
+            }
+        }
+    }
 
     public void setExpanded(boolean expanded) {
         this.expanded = expanded;

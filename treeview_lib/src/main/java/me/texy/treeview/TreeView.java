@@ -94,6 +94,12 @@ public class TreeView implements SelectableTreeAction {
         }
     }
 
+    public void updateTreeView() {
+        if (rootView != null) {
+            rootView.getAdapter().notifyDataSetChanged();
+        }
+    }
+
     @Override
     public void expandNode(TreeNode treeNode) {
         adapter.expandNode(treeNode);
