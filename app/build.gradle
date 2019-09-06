@@ -5,7 +5,7 @@ android {
     buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId "me.texy.treeviewdemo"
-        minSdkVersion 17
+        minSdkVersion 14
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -26,9 +26,8 @@ dependencies {
     androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     testImplementation 'junit:junit:4.12'
     implementation project(':treeview_lib')
-    //implementation 'me.texy.treeview:treeview_lib:1.0.4'
 }

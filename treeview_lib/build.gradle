@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     buildToolsVersion '28.0.3'
     defaultConfig {
-        minSdkVersion 15
+        minSdkVersion 14
         targetSdkVersion 28
         versionCode 7
         versionName "1.0.6"
@@ -28,7 +28,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
-    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.0.2'
     testImplementation 'junit:junit:4.12'
 }
 apply from: "bintray.gradle"
