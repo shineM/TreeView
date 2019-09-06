@@ -45,6 +45,11 @@ public class TreeNode {
         this.children = new ArrayList<>();
     }
 
+    public TreeNode(Object value, int level) {
+        this(value);
+        setLevel(level);
+    }
+
     public static TreeNode root() {
         TreeNode treeNode = new TreeNode(null);
         return treeNode;
