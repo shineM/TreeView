@@ -15,15 +15,14 @@
 package me.texy.treeview;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.SimpleItemAnimator;
 import android.view.View;
 
 import java.util.List;
 
-import me.texy.treeview.animator.TreeItemAnimator;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SimpleItemAnimator;
 import me.texy.treeview.base.BaseNodeViewFactory;
 import me.texy.treeview.base.SelectableTreeAction;
 import me.texy.treeview.helper.TreeHelper;
@@ -44,15 +43,6 @@ public class TreeView implements SelectableTreeAction {
     private TreeViewAdapter adapter;
 
     private boolean itemSelectable = true;
-
-    public void setItemAnimator(RecyclerView.ItemAnimator itemAnimator) {
-        this.itemAnimator = itemAnimator;
-        if (rootView != null && itemAnimator != null) {
-            rootView.setItemAnimator(itemAnimator);
-        }
-    }
-
-    private RecyclerView.ItemAnimator itemAnimator;
 
     public TreeView(@NonNull TreeNode root, @NonNull Context context, @NonNull BaseNodeViewFactory baseNodeViewFactory) {
         this.root = root;
@@ -78,10 +68,7 @@ public class TreeView implements SelectableTreeAction {
          * disable multi touch event to prevent terrible data set error when calculate list.
          */
         recyclerView.setMotionEventSplittingEnabled(false);
-
-        recyclerView.setItemAnimator(itemAnimator != null ? itemAnimator : new TreeItemAnimator());
-        SimpleItemAnimator itemAnimator = (SimpleItemAnimator) recyclerView.getItemAnimator();
-        itemAnimator.setSupportsChangeAnimations(false);
+        ((SimpleItemAnimator) recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         adapter = new TreeViewAdapter(context, root, baseNodeViewFactory);
