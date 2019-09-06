@@ -15,8 +15,6 @@
 package me.texy.treeview;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +23,8 @@ import android.widget.Checkable;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import me.texy.treeview.base.BaseNodeViewBinder;
 import me.texy.treeview.base.BaseNodeViewFactory;
 import me.texy.treeview.base.CheckableNodeViewBinder;
@@ -34,7 +34,7 @@ import me.texy.treeview.helper.TreeHelper;
  * Created by xinyuanzhong on 2017/4/21.
  */
 
-public class TreeViewAdapter extends RecyclerView.Adapter {
+public class TreeViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;
 
@@ -44,8 +44,6 @@ public class TreeViewAdapter extends RecyclerView.Adapter {
 
     private BaseNodeViewFactory baseNodeViewFactory;
 
-    private View EMPTY_PARAMETER;
-
     private TreeView treeView;
 
     TreeViewAdapter(Context context, TreeNode root,
@@ -54,7 +52,6 @@ public class TreeViewAdapter extends RecyclerView.Adapter {
         this.root = root;
         this.baseNodeViewFactory = baseNodeViewFactory;
 
-        this.EMPTY_PARAMETER = new View(context);
         this.expandedNodeList = new ArrayList<>();
 
         buildExpandedNodeList();
@@ -92,8 +89,7 @@ public class TreeViewAdapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int level) {
-        View view = LayoutInflater.from(context).inflate(baseNodeViewFactory
-                .getNodeViewBinder(EMPTY_PARAMETER, level).getLayoutId(), parent, false);
+        View view = LayoutInflater.from(context).inflate(baseNodeViewFactory.getNodeLayoutId(level), parent, false);
 
         BaseNodeViewBinder nodeViewBinder = baseNodeViewFactory.getNodeViewBinder(view, level);
         nodeViewBinder.setTreeView(treeView);

@@ -4,7 +4,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import me.texy.treeviewdemo.R;
 import me.texy.treeview.TreeNode;
 import me.texy.treeview.base.CheckableNodeViewBinder;
 
@@ -25,11 +24,6 @@ public class SecondLevelNodeViewBinder extends CheckableNodeViewBinder {
     @Override
     public int getCheckableViewId() {
         return R.id.checkBox;
-    }
-
-    @Override
-    public int getLayoutId() {
-        return R.layout.item_second_level;
     }
 
     @Override

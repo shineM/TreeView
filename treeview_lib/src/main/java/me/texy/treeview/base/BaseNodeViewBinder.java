@@ -14,9 +14,9 @@
 
 package me.texy.treeview.base;
 
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
+import androidx.recyclerview.widget.RecyclerView;
 import me.texy.treeview.TreeNode;
 import me.texy.treeview.TreeView;
 
@@ -38,11 +38,6 @@ public abstract class BaseNodeViewBinder extends RecyclerView.ViewHolder {
     public void setTreeView(TreeView treeView) {
         this.treeView = treeView;
     }
-
-    /**
-     * Get node item layout id
-     */
-    public abstract int getLayoutId();
 
     /**
      * Bind your data to view,you can get the data from treeNode by getValue()

@@ -44,4 +44,13 @@ public abstract class BaseNodeViewFactory {
      */
     public abstract BaseNodeViewBinder getNodeViewBinder(View view, int viewType);
 
+
+    /**
+     * If you want build a tree view,you must implement this factory method
+     *
+     * @param level Level of view, returned from {@link #getViewType}
+     * @return node layout id
+     */
+    public abstract int getNodeLayoutId(int level);
+
 }
