@@ -25,4 +25,18 @@ public class MyNodeViewFactory extends BaseNodeViewFactory {
                 return null;
         }
     }
+
+    @Override
+    public int getNodeLayoutId(int level) {
+        switch (level) {
+            case 0:
+                return R.layout.item_first_level;
+            case 1:
+                return R.layout.item_second_level;
+            case 2:
+                return R.layout.item_third_level;
+            default:
+                return 0;
+        }
+    }
 }

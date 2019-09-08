@@ -4,7 +4,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import me.texy.treeviewdemo.R;
 import me.texy.treeview.TreeNode;
 import me.texy.treeview.base.CheckableNodeViewBinder;
 
@@ -17,18 +16,13 @@ public class FirstLevelNodeViewBinder extends CheckableNodeViewBinder {
     ImageView imageView;
     public FirstLevelNodeViewBinder(View itemView) {
         super(itemView);
-        textView = (TextView) itemView.findViewById(R.id.node_name_view);
-        imageView = (ImageView) itemView.findViewById(R.id.arrow_img);
+        textView = itemView.findViewById(R.id.node_name_view);
+        imageView = itemView.findViewById(R.id.arrow_img);
     }
 
     @Override
     public int getCheckableViewId() {
         return R.id.checkBox;
-    }
-
-    @Override
-    public int getLayoutId() {
-        return R.layout.item_first_level;
     }
 
     @Override
